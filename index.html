@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Kauê Joias — Elegância e Sofisticação em Cada Detalhe. Joias e semijoias de alta qualidade."/>
+  <title>Kauê Joias — Elegância em Cada Detalhe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 120 80%22 fill=%22%23C5944E%22 stroke=%22%23C5944E%22><ellipse cx=%2250%22 cy=%2245%22 rx=%2242%22 ry=%2222%22 fill=%22none%22 stroke-width=%224%22 transform=%22rotate(-12 50 45)%22/><text x=%2250%22 y=%2261%22 font-family=%22serif%22 font-size=%2258%22 font-style=%22italic%22 font-weight=%22600%22 text-anchor=%22middle%22 stroke=%22none%22>C</text><path d=%22M95,10 Q98,30 118,33 Q98,36 95,56 Q92,36 72,33 Q92,30 95,10 Z%22 stroke=%22none%22/><path d=%22M95,17 Q97,31 108,33 Q97,35 95,49 Q93,35 82,33 Q93,31 95,17 Z%22 stroke=%22none%22 transform=%22rotate(45 95 33)%22/></svg>">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- SPLASH SCREEN -->
+<div id="splash">
+  <div class="splash-logo">
+    <div class="splash-wordmark">Kauê</div>
+    <div class="splash-sub">Joias &nbsp;·&nbsp; Folheados &amp; Semijoias</div>
+  </div>
+  <div class="splash-divider"></div>
+  <p class="splash-tagline">"Elegância e sofisticação em cada detalhe."</p>
+  <div class="splash-bar-wrap">
+    <div class="splash-bar"></div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+
+    <!-- Logo -->
+    <a href="index.html" class="site-logo">
+      <span class="logo-cristal" style="font-family: var(--font-serif); font-size: 2.2rem; font-weight: 600; font-style: italic; color: var(--gold); letter-spacing: 0.02em;">Kauê <span style="font-family: var(--font-sans); font-size: 1.2rem; font-style: normal; font-weight: 400; color: var(--ink); letter-spacing: 0.05em; text-transform: uppercase;">Joias</span></span>
+    </a>
+
+    <!-- Center nav — desktop -->
+    <nav class="header-nav" id="headerNav">
+      <a href="produtos.html" class="header-nav-link">Produtos</a>
+      <a href="favoritos.html" class="header-nav-link">Favoritos</a>
+      <a href="#sobre" class="header-nav-link">Sobre</a>
+    </nav>
+
+    <!-- Search bar (expands inside pill) -->
+    <div class="header-search-wrap" id="headerSearchWrap">
+      <input
+        type="search"
+        id="headerSearchInput"
+        class="header-search-input"
+        placeholder="Pesquisar joias..."
+        aria-label="Pesquisar produtos"
+        autocomplete="off"
+      />
+      <button class="header-search-clear" id="headerSearchClear" aria-label="Limpar pesquisa">✕</button>
+    </div>
+
+    <!-- Right actions -->
+    <div class="header-right">
+      <!-- Search toggle -->
+      <button class="btn-icon-pill" id="btnSearch" aria-label="Pesquisar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+      </button>
+      <!-- WhatsApp -->
+      <a href="https://wa.me/5588998333235" class="btn-whatsapp-header" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Fale Connosco
+      </a>
+      <!-- Favoritos -->
+      <a href="favoritos.html" class="btn-icon-pill" aria-label="Favoritos" style="margin-left: 0.3rem; position: relative;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+        </svg>
+        <span class="sacola-count wish-badge" style="background: #e07070;">0</span>
+      </a>
+      <!-- Sacola -->
+      <a href="sacola.html" class="btn-sacola" id="btnSacola" aria-label="Sacola">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <path d="M16 10a4 4 0 0 1-8 0"/>
+        </svg>
+        <span class="sacola-count" id="sacolaCount">0</span>
+      </a>
+      <!-- Hamburger (mobile) -->
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+  </div>
+</header>
+
+<!-- MOBILE MENU -->
+<nav class="mob-menu" id="mobMenu" aria-hidden="true">
+  <span class="mob-corner mob-corner--tl" aria-hidden="true"></span>
+  <span class="mob-corner mob-corner--tr" aria-hidden="true"></span>
+  <span class="mob-corner mob-corner--bl" aria-hidden="true"></span>
+  <span class="mob-corner mob-corner--br" aria-hidden="true"></span>
+  <button class="mob-close" id="mobClose" aria-label="Fechar">✕</button>
+  <div class="mob-header">
+    <a href="index.html" class="mob-logo" style="font-family: var(--font-serif); font-size: 2.2rem; font-weight: 600; font-style: italic; color: var(--gold); letter-spacing: 0.02em;">Kauê <span style="font-family: var(--font-sans); font-size: 1.2rem; font-style: normal; font-weight: 400; color: var(--white); letter-spacing: 0.05em; text-transform: uppercase;">Joias</span></a>
+    <p class="mob-tagline">Joias &amp; Semijoias</p>
+  </div>
+  <div class="mob-divider"><span>✦</span></div>
+  <div class="mob-search-wrap">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="search" id="mobSearchInput" class="mob-search-input" placeholder="Pesquisar joias..." autocomplete="off"/>
+  </div>
+  <nav class="mob-nav">
+    <a href="produtos.html" class="mob-link" style="--i:0">Produtos</a>
+    <a href="favoritos.html" class="mob-link" style="--i:1">Favoritos</a>
+    <a href="#sobre"        class="mob-link" style="--i:2">Sobre</a>
+    <a href="sacola.html"   class="mob-link" style="--i:3">Sacola</a>
+  </nav>
+  <div class="mob-footer">
+    <a href="https://wa.me/5588998333235" class="mob-wa-btn" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+      Fale Conosco
+    </a>
+    <p class="mob-copy">© 2025 Kauê Joias</p>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-img-wrap">
+    <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=95&w=1400&auto=format&fit=crop" alt="Modelo usando joias Cristal Folheados" class="hero-img"/>
+    <div class="hero-overlay"></div>
+  </div>
+  <div class="hero-content">
+    <p class="hero-label">Coleção 2025</p>
+    <h1 class="hero-title">Elegância e Sofisticação<br/><em>em Cada Detalhe</em></h1>
+    <p class="hero-sub">Joias e semijoias criadas para realçar a sua beleza e contar a sua história.</p>
+    <a href="produtos.html" class="btn-gold">Ver Coleção</a>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Anéis</span><span>✦</span><span>Brincos</span><span>✦</span>
+    <span>Colares</span><span>✦</span><span>Pulseiras</span><span>✦</span>
+    <span>Pingentes</span><span>✦</span><span>Semijoias</span><span>✦</span>
+    <span>Anéis</span><span>✦</span><span>Brincos</span><span>✦</span>
+    <span>Colares</span><span>✦</span><span>Pulseiras</span><span>✦</span>
+    <span>Pingentes</span><span>✦</span><span>Semijoias</span><span>✦</span>
+  </div>
+</div>
+
+<!-- VITRINE -->
+<section class="vitrine-section" id="vitrine">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Nossa Vitrine</span>
+      <h2 class="section-title">Peças em <em>Destaque</em></h2>
+      <p class="section-sub">Clique na peça desejada e fale diretamente com a nossa consultora.</p>
+    </div>
+    <div class="products-grid" id="productsGrid"></div>
+  </div>
+</section>
+
+<!-- SOBRE -->
+<section class="sobre-section" id="sobre">
+  <div class="sobre-img">
+    <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=90&w=900&auto=format&fit=crop" alt="Joias Cristal Folheados" loading="lazy"/>
+  </div>
+  <div class="sobre-content">
+    <span class="section-label">Quem Somos</span>
+    <h2 class="sobre-title">Arte que você<br/><em>carrega na pele</em></h2>
+    <p class="sobre-text">Na Kauê Joias, cada peça é escolhida com cuidado e paixão. Trabalhamos com semijoias de alta qualidade, banhadas a ouro e prata, para que você se sinta radiante em cada momento da sua vida.</p>
+    <div class="diferenciais">
+      <div class="diferencial">
+        <span class="dif-icon">✦</span>
+        <div>
+          <p class="dif-title">Qualidade Garantida</p>
+          <p class="dif-desc">Peças com banho reforçado e durabilidade comprovada.</p>
+        </div>
+      </div>
+      <div class="diferencial">
+        <span class="dif-icon">✦</span>
+        <div>
+          <p class="dif-title">Atendimento Personalizado</p>
+          <p class="dif-desc">Fale diretamente com a consultora pelo WhatsApp.</p>
+        </div>
+      </div>
+      <div class="diferencial">
+        <span class="dif-icon">✦</span>
+        <div>
+          <p class="dif-title">Entrega Rápida</p>
+          <p class="dif-desc">Enviamos para todo o Brasil com segurança e agilidade.</p>
+        </div>
+      </div>
+    </div>
+    <a href="https://wa.me/5588998333235" class="btn-gold" target="_blank" rel="noopener">Fale Conosco no WhatsApp</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <a href="index.html" class="footer-logo">
+      <span style="font-family: var(--font-serif); font-size: 2.2rem; font-weight: 600; font-style: italic; color: var(--gold); letter-spacing: 0.02em;">Kauê <span style="font-family: var(--font-sans); font-size: 1.2rem; font-style: normal; font-weight: 400; color: var(--ink); letter-spacing: 0.05em; text-transform: uppercase;">Joias</span></span>
+    </a>
+    <p class="footer-tagline">"Elegância e sofisticação em cada detalhe."</p>
+    <p class="footer-contato">
+      WhatsApp: <a href="https://wa.me/5588998333235">(88) 9 9833-3235</a>
+    </p>
+    <p class="footer-copy">© 2025 Kauê Joias. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<!-- WHATSAPP FAB -->
+<a href="https://wa.me/5588998333235" class="wa-fab" aria-label="WhatsApp" target="_blank" rel="noopener">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+</a>
+
+<!-- MODAL WHATSAPP -->
+<div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-box">
+    <button class="modal-close" id="modalClose" aria-label="Fechar">✕</button>
+    <div class="modal-header">
+      <span class="modal-label">Compra Rápida</span>
+      <h2 class="modal-title" id="modalTitle">Quase lá!</h2>
+      <p class="modal-sub">Preencha o seu nome e enviaremos a mensagem pronta para o WhatsApp.</p>
+    </div>
+    <div class="modal-product-info">
+      <p class="modal-product-name" id="modalProductName"></p>
+      <p class="modal-product-price" id="modalProductPrice"></p>
+    </div>
+    <form class="modal-form" id="modalForm" onsubmit="submitModal(event)">
+      <label for="clientName">O seu nome</label>
+      <input type="text" id="clientName" placeholder="Ex: Maria Silva" required autocomplete="given-name"/>
+      <button type="submit" class="btn-gold btn-full">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Enviar pelo WhatsApp
+      </button>
+    </form>
+  </div>
+</div>
+
+<script src="produtos.js"></script>
+<script src="main.js"></script>
+<script>
+  // Renderiza as primeiras 8 peças da vitrine dinamicamente
+  document.addEventListener('DOMContentLoaded', () => {
+    const grid = document.getElementById('productsGrid');
+    if (grid && typeof PRODUCTS !== 'undefined') {
+      grid.innerHTML = PRODUCTS.slice(0, 8).map(buildProductCard).join('');
+    }
+  });
+</script>
+</body>
+</html>

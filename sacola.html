@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Sacola — Kauê Joias. Revise seus itens e finalize seu pedido."/>
+  <title>Sacola — Kauê Joias</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .page-hero {
+      background: var(--off-white);
+      padding: 8rem 2.5rem 5rem;
+      text-align: center;
+    }
+    .page-hero .section-label { margin-bottom: 1.5rem; display:block;}
+    .page-hero h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(3rem, 5vw, 4.5rem);
+      font-weight: 600; line-height: 1.1; color: var(--ink);
+    }
+    .page-hero h1 em { font-style: italic; color: var(--gold); }
+    .page-hero p { font-size: 0.85rem; color: var(--gray-600); margin-top: 1rem; letter-spacing: 0.04em; max-width: 500px; margin-left: auto; margin-right: auto; }
+    
+    .cart-section { padding: 5rem 0; background: var(--white); }
+    .cart-layout {
+      display: grid; grid-template-columns: 1fr 380px; gap: 4rem;
+      max-width: 1200px; margin: 0 auto;
+    }
+    @media (max-width: 900px) { .cart-layout { grid-template-columns: 1fr; gap: 3rem; } }
+    @media (max-width: 480px) {
+      .cart-item { flex-direction: column; text-align: center; }
+      .cart-item-thumb { width: 100%; height: 240px; }
+      .cart-item-info { align-items: center; }
+      .cart-summary { padding: 1.5rem; }
+    }
+    
+    .cart-item {
+      display: flex; gap: 1.5rem; padding: 1.5rem 0;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      transition: opacity 0.3s;
+    }
+    .cart-item.removing { opacity: 0; }
+    .cart-item-thumb {
+      width: 100px; height: 120px; flex-shrink: 0;
+      background: var(--off-white); border-radius: 8px; overflow: hidden;
+    }
+    .cart-item-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .cart-item-info { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+    .cart-item-name { font-family: var(--font-serif); font-size: 1.2rem; font-weight: 600; color: var(--ink); margin-bottom: 0.3rem; }
+    .cart-item-price { font-size: 0.8rem; color: var(--gold); font-weight: 500; margin-bottom: 1rem; }
+    .cart-qty {
+      display: inline-flex; align-items: center; border: 1px solid rgba(0,0,0,0.1);
+      border-radius: 6px; overflow: hidden;
+    }
+    .cart-qty-btn { padding: 0.4rem 0.8rem; background: var(--white); color: var(--ink); }
+    .cart-qty-btn:hover { background: var(--off-white); }
+    .cart-qty-val { padding: 0 0.8rem; font-size: 0.85rem; }
+    .cart-item-remove {
+      margin-left: auto; align-self: center;
+      font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray-400);
+      text-decoration: underline; transition: color var(--dur);
+    }
+    .cart-item-remove:hover { color: var(--ink); }
+    
+    .cart-summary {
+      background: var(--off-white); padding: 2.5rem; border-radius: 12px;
+      height: fit-content; position: sticky; top: 100px;
+    }
+    .cart-summary-title {
+      font-family: var(--font-serif); font-size: 1.5rem; font-weight: 600; color: var(--ink);
+      margin-bottom: 2rem; border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 1rem;
+    }
+    .cart-summary-row {
+      display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--gray-600);
+      margin-bottom: 1rem;
+    }
+    .cart-summary-row.total {
+      font-size: 1.1rem; font-weight: 600; color: var(--ink);
+      margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(0,0,0,0.05);
+    }
+    
+    .cart-empty { text-align: center; padding: 4rem 0; }
+    .cart-empty-icon { font-size: 3rem; margin-bottom: 1rem; display: block; opacity: 0.5;}
+    .cart-empty h3 { font-family: var(--font-serif); font-size: 2rem; font-weight: 600; margin-bottom: 1rem; }
+    .cart-empty p { color: var(--gray-400); margin-bottom: 2rem; }
+    
+    .toast {
+      position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(100px);
+      background: var(--ink); color: var(--white); padding: 0.8rem 1.5rem;
+      border-radius: 8px; font-size: 0.8rem; letter-spacing: 0.05em;
+      opacity: 0; transition: transform 0.4s var(--ease), opacity 0.4s; z-index: 9999;
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+  </style>
+</head>
+<body data-page="sacola">
+
+<!-- HEADER -->
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+
+    <!-- Logo -->
+    <a href="index.html" class="site-logo">
+      <span class="logo-cristal" style="font-family: var(--font-serif); font-size: 2.2rem; font-weight: 600; font-style: italic; color: var(--gold); letter-spacing: 0.02em;">Kauê <span style="font-family: var(--font-sans); font-size: 1.2rem; font-style: normal; font-weight: 400; color: var(--ink); letter-spacing: 0.05em; text-transform: uppercase;">Joias</span></span>
+    </a>
+
+    <!-- Center nav — desktop -->
+    <nav class="header-nav" id="headerNav">
+      <a href="produtos.html" class="header-nav-link">Produtos</a>
+      <a href="favoritos.html" class="header-nav-link">Favoritos</a>
+      <a href="index.html#sobre" class="header-nav-link">Sobre</a>
+    </nav>
+
+    <!-- Search bar (expands inside pill) -->
+    <div class="header-search-wrap" id="headerSearchWrap">
+      <input
+        type="search"
+        id="headerSearchInput"
+        class="header-search-input"
+        placeholder="Pesquisar joias..."
+        aria-label="Pesquisar produtos"
+        autocomplete="off"
+      />
+      <button class="header-search-clear" id="headerSearchClear" aria-label="Limpar pesquisa">✕</button>
+    </div>
+
+    <!-- Right actions -->
+    <div class="header-right">
+      <!-- Search toggle -->
+      <button class="btn-icon-pill" id="btnSearch" aria-label="Pesquisar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+      </button>
+      <!-- WhatsApp -->
+      <a href="https://wa.me/5588998333235" class="btn-whatsapp-header" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+      Fale Conosco
+    </a>
+    <!-- Favoritos -->
+    <a href="favoritos.html" class="btn-icon-pill" aria-label="Favoritos" style="margin-left: 0.3rem; position: relative;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+      </svg>
+      <span class="sacola-count wish-badge" style="background: #e07070;">0</span>
+    </a>
+    <!-- Sacola -->
+    <a href="sacola.html" class="btn-sacola" id="btnSacola" aria-label="Sacola">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <path d="M16 10a4 4 0 0 1-8 0"/>
+      </svg>
+      <span class="sacola-count" id="sacolaCount">0</span>
+    </a>
+    <!-- Hamburger (mobile) -->
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+</div>
+</header>
+
+<!-- MOBILE MENU -->
+<nav class="mob-menu" id="mobMenu" aria-hidden="true">
+<span class="mob-corner mob-corner--tl" aria-hidden="true"></span>
+<span class="mob-corner mob-corner--tr" aria-hidden="true"></span>
+<span class="mob-corner mob-corner--bl" aria-hidden="true"></span>
+<span class="mob-corner mob-corner--br" aria-hidden="true"></span>
+<button class="mob-close" id="mobClose" aria-label="Fechar">✕</button>
+<div class="mob-header">
+  <a href="index.html" class="mob-logo" style="font-family: var(--font-serif); font-size: 2.2rem; font-weight: 600; font-style: italic; color: var(--gold); letter-spacing: 0.02em;">Kauê <span style="font-family: var(--font-sans); font-size: 1.2rem; font-style: normal; font-weight: 400; color: var(--white); letter-spacing: 0.05em; text-transform: uppercase;">Joias</span></a>
+  <p class="mob-tagline">Joias &amp; Semijoias</p>
+</div>
+<div class="mob-divider"><span>✦</span></div>
+<div class="mob-search-wrap">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  <input type="search" id="mobSearchInput" class="mob-search-input" placeholder="Pesquisar joias..." autocomplete="off"/>
+</div>
+<nav class="mob-nav">
+  <a href="produtos.html" class="mob-link" style="--i:0">Produtos</a>
+  <a href="favoritos.html" class="mob-link" style="--i:1">Favoritos</a>
+  <a href="index.html#sobre" class="mob-link" style="--i:2">Sobre</a>
+  <a href="sacola.html"   class="mob-link" style="--i:3">Sacola</a>
+</nav>
+<div class="mob-footer">
+  <a href="https://wa.me/5588998333235" class="mob-wa-btn" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    Fale Conosco
+  </a>
+  <p class="mob-copy">© 2025 Kauê Joias</p>
+</div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="container">
+    <span class="section-label">Minha Sacola</span>
+    <h1>Sua <em>Seleção</em></h1>
+    <p>Revise os itens escolhidos e finalize o seu pedido de forma rápida e segura via WhatsApp.</p>
+  </div>
+</div>
+
+<!-- CART SECTION -->
+<section class="cart-section">
+  <div class="container">
+
+    <!-- EMPTY STATE -->
+    <div class="cart-empty" id="cartEmpty" style="display:none;">
+      <span class="cart-empty-icon">🛍️</span>
+      <h3>Sua sacola está vazia</h3>
+      <p>Explore o nosso catálogo e adicione as peças que você amar.</p>
+      <a href="produtos.html" class="btn-gold" style="margin-top:1rem;">Ver Coleção</a>
+    </div>
+
+    <!-- CART LAYOUT -->
+    <div class="cart-layout" id="cartLayout" style="display:none;">
+
+      <!-- LEFT: Items -->
+      <div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;border-bottom:1px solid rgba(0,0,0,0.05);padding-bottom:1rem;">
+          <p style="font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gray-600);">
+            <span id="cartItemCount">0</span> itens selecionados
+          </p>
+          <button class="cart-item-remove" onclick="handleClearCart()">Esvaziar sacola</button>
+        </div>
+        <div class="cart-list" id="cartList"></div>
+      </div>
+
+      <!-- RIGHT: Summary -->
+      <aside class="cart-summary">
+        <h2 class="cart-summary-title">Resumo</h2>
+
+        <div class="cart-summary-row">
+          <span>Subtotal (<span id="summaryQty">0</span> itens)</span>
+          <span id="summarySubtotal">R$ 0,00</span>
+        </div>
+        <div class="cart-summary-row">
+          <span>Frete</span>
+          <span>A combinar</span>
+        </div>
+
+        <div class="cart-summary-row total">
+          <span>Total</span>
+          <span id="summaryTotal">R$ 0,00</span>
+        </div>
+
+        <a class="btn-gold btn-full" id="checkoutBtn" href="#" target="_blank" rel="noopener" style="margin-top:1.5rem;">
+          <svg viewBox="0 0 24 24" style="fill:white;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          Finalizar no WhatsApp
+        </a>
+
+        <a href="produtos.html" class="cart-item-remove" style="display:block; text-align:center; margin-top:1.5rem; text-decoration:none;">← Continuar comprando</a>
+      </aside>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <a href="index.html" class="footer-logo">
+      <span style="font-family: var(--font-serif); font-size: 2.2rem; font-weight: 600; font-style: italic; color: var(--gold); letter-spacing: 0.02em;">Kauê <span style="font-family: var(--font-sans); font-size: 1.2rem; font-style: normal; font-weight: 400; color: var(--ink); letter-spacing: 0.05em; text-transform: uppercase;">Joias</span></span>
+    </a>
+    <p class="footer-tagline">"Elegância e sofisticação em cada detalhe."</p>
+    <p class="footer-contato">
+      WhatsApp: <a href="https://wa.me/5588998333235">(88) 9 9833-3235</a>
+    </p>
+    <p class="footer-copy">© 2025 Kauê Joias. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script src="main.js"></script>
+</body>
+</html>
