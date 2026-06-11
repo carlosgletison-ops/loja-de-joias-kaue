@@ -1,5 +1,5 @@
 /* =============================================
-   KAUÊ JOIAS — JS
+   CRISTAL FOLHEADOS — JS
 ============================================= */
 const WA_NUMBER = '5588998333235';
 
@@ -272,11 +272,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /* --- FAVORITOS (WISHLIST) --- */
 function getWishlist() {
-  return JSON.parse(localStorage.getItem('kaue_wishlist')) || [];
+  return JSON.parse(localStorage.getItem('cristal_wishlist')) || [];
 }
 
 function saveWishlist(wl) {
-  localStorage.setItem('kaue_wishlist', JSON.stringify(wl));
+  localStorage.setItem('cristal_wishlist', JSON.stringify(wl));
   updateWishBadge();
 }
 
