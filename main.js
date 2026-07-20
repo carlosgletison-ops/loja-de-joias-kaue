@@ -1,7 +1,7 @@
 /* =============================================
    CRISTAL FOLHEADOS — JS
 ============================================= */
-const WA_NUMBER = '5588998333235';
+const WA_NUMBER = '5511984014901';
 
 /* --- CARRINHO (SACOLA) --- */
 function getCart() {
