@@ -163,11 +163,13 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .site-header.floating { padding: 0.55rem 1.5rem; }
 
 /* Offset the fixed header when there is a topbar on the page */
+.topbar ~ .site-header,
 body[data-page="produtos"] .site-header,
 body[data-page="favoritos"] .site-header {
   top: 38px;
 }
 /* When scrolling, the topbar scrolls out of view and the header sticks to top: 0 */
+.topbar ~ .site-header.floating,
 body[data-page="produtos"] .site-header.floating,
 body[data-page="favoritos"] .site-header.floating {
   top: 0;
